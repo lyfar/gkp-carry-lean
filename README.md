@@ -181,9 +181,9 @@ the pinned Lean kernel; AI provenance is not a substitute for checking.
 
 The existing maintainer-facing GKP characterization is
 [Vilin97/lean-pool PR 273](https://github.com/Vilin97/lean-pool/pull/273).
-The odd-prime valuation-distribution theory is intended for a separate,
-mathematical Lean Pool project and PR, with no personal material in upstream
-project files.
+The odd-prime valuation-distribution theory is submitted separately as
+[Vilin97/lean-pool PR 276](https://github.com/Vilin97/lean-pool/pull/276),
+with no personal material in upstream project files.
 
 ## License
 
