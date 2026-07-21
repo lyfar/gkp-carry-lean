@@ -21,5 +21,9 @@ jobs:
         run: lake exe cache get
       - name: Build project
         run: lake build
+      - name: Run declaration linter
+        run: lake exe runLinter GKPCarry
+      - name: Run style linter
+        run: lake exe lint-style GKPCarry
       - name: Audit proof surface
         run: bash scripts/audit.sh

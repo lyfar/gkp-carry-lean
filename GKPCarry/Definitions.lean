@@ -3,13 +3,16 @@ Copyright (c) 2026 Egor Lyfar. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Egor Lyfar
 -/
-import Mathlib
+import Lean.Elab.Tactic.Omega
+import Mathlib.Data.List.Count
+import Mathlib.Data.Nat.Digits.Defs
 
 /-!
 # Ternary prefixes and doubling carries
 
-This file gives the small collection of definitions needed for the bounded C3
-certificate. Ternary digit lists are little-endian, following `Nat.digits`.
+This file gives the definitions used by the carry-language theory and its
+bounded C3 corollary. Ternary digit lists are little-endian, following
+`Nat.digits`.
 -/
 
 namespace GKPCarry
@@ -67,5 +70,25 @@ theorem two_le_prefixTernaryDoubleCarryCount_of_hasTwoTernaryTwosBelow
       simpa [prefixTernaryDoubleCarryCount, ternaryDoubleCarryCount] using
         count_two_le_ternaryDoubleCarryCountAux
           ((Nat.digits 3 n).take depth) 0)
+
+lemma ternaryDoubleCarryCountAux_take_le
+    (depth : ℕ) (digits : List ℕ) (carry : ℕ) :
+    ternaryDoubleCarryCountAux (digits.take depth) carry ≤
+      ternaryDoubleCarryCountAux digits carry := by
+  induction depth generalizing digits carry with
+  | zero => simp [ternaryDoubleCarryCountAux]
+  | succ depth ih =>
+      cases digits with
+      | nil => simp [ternaryDoubleCarryCountAux]
+      | cons digit digits =>
+          simp only [List.take_succ_cons, ternaryDoubleCarryCountAux]
+          exact Nat.add_le_add_left
+            (ih digits (ternaryDoubleCarryStep carry digit)) _
+
+/-- A prefix cannot contain more doubling carries than the complete word. -/
+theorem prefixTernaryDoubleCarryCount_le (depth n : ℕ) :
+    prefixTernaryDoubleCarryCount depth n ≤
+      ternaryDoubleCarryCount (Nat.digits 3 n) := by
+  exact ternaryDoubleCarryCountAux_take_le depth (Nat.digits 3 n) 0
 
 end GKPCarry

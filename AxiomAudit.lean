@@ -5,9 +5,19 @@ Authors: Egor Lyfar
 -/
 import GKPCarry
 
+#print axioms GKPCarry.sub_one_mul_padicValNat_centralBinom
+#print axioms GKPCarry.padicValNat_two_centralBinom
+#print axioms GKPCarry.gkpConjecture_iff_powerOfTwo
+#print axioms GKPCarry.ternaryDigitExcess_eq_two_mul_ternaryDoubleCarryCount
+#print axioms GKPCarry.nine_dvd_centralBinom_iff_two_le_ternaryDoubleCarryCount
+#print axioms GKPCarry.badCarryLanguage_true_iff_carryCount_lt_two
+#print axioms GKPCarry.badCarryLanguage_true_iff_shape
+#print axioms GKPCarry.card_badCarryWords
+#print axioms GKPCarry.gkpConjecture_iff_badCarryLanguageExclusion
 #print axioms GKPCarry.powModDigits_eq_pow_mod
 #print axioms GKPCarry.powMod_eq_pow_mod
 #print axioms GKPCarry.hasTwoTernaryTwosBelow_iff_mod
 #print axioms GKPCarry.four_pow_has_two_ternary_twos_in_finite_range
 #print axioms GKPCarry.four_pow_has_two_ternary_twos_of_length_le_eight
 #print axioms GKPCarry.four_pow_prefix_carry_count_ge_two_in_finite_range
+#print axioms GKPCarry.nine_dvd_centralBinom_four_pow_in_finite_range
