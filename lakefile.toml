@@ -1,0 +1,18 @@
+name = "gkp-carry-lean"
+version = "0.1.0"
+keywords = ["lean", "number-theory", "ternary", "carry"]
+defaultTargets = ["GKPCarry"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.31.0-rc1"
+
+[[lean_lib]]
+name = "GKPCarry"

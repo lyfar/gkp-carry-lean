@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009b7424174a5491b8e1a45
+      - name: Install Lean
+        uses: leanprover/lean-action@38fbc41a0d2f842a50d5a794109c99a68df60121
+        with:
+          auto-config: false
+      - name: Download Mathlib cache
+        run: lake exe cache get
+      - name: Build project
+        run: lake build
+      - name: Audit proof surface
+        run: bash scripts/audit.sh
