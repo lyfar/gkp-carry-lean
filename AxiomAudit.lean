@@ -21,3 +21,10 @@ import GKPCarry
 #print axioms GKPCarry.four_pow_has_two_ternary_twos_of_length_le_eight
 #print axioms GKPCarry.four_pow_prefix_carry_count_ge_two_in_finite_range
 #print axioms GKPCarry.nine_dvd_centralBinom_four_pow_in_finite_range
+#print axioms GKPCarry.padicValNat_oddPrime_centralBinom_ofDigits_eq_carryCount
+#print axioms GKPCarry.oddPrimeValuationPolynomial_eq_carryPolynomial
+#print axioms GKPCarry.oddPrimeValuationPolynomial_recurrence
+#print axioms GKPCarry.oddPrimeValuationGeneratingSeries_identity
+#print axioms GKPCarry.card_oddPrimeBlock_valuation_zero
+#print axioms GKPCarry.card_oddPrimeBlock_valuation_one
+#print axioms GKPCarry.card_ternaryBlock_valuation_lt_two

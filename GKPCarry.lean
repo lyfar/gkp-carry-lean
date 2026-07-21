@@ -6,3 +6,4 @@ Authors: Egor Lyfar
 import GKPCarry.BadCarryCounting
 import GKPCarry.FiniteRangeCorollary
 import GKPCarry.GKPCharacterization
+import GKPCarry.OddPrimeDistribution
