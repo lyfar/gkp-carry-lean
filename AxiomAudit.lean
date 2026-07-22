@@ -28,3 +28,12 @@ import GKPCarry
 #print axioms GKPCarry.card_oddPrimeBlock_valuation_zero
 #print axioms GKPCarry.card_oddPrimeBlock_valuation_one
 #print axioms GKPCarry.card_ternaryBlock_valuation_lt_two
+#print axioms GKPCarry.orderOf_twoUnit
+#print axioms GKPCarry.card_unitBadCarryWords
+#print axioms GKPCarry.card_uncertifiedExponentClasses
+#print axioms GKPCarry.card_certifiedExponentClasses
+#print axioms GKPCarry.tendsto_uncertifiedClassProportion
+#print axioms GKPCarry.tendsto_certifiedClassProportion
+#print axioms GKPCarry.nine_dvd_centralBinom_two_pow_of_safe_mod_eighteen
+#print axioms GKPCarry.badCarryLanguage_two_pow_eq_false_of_certified_class
+#print axioms GKPCarry.gkp_exact_modular_sieve
