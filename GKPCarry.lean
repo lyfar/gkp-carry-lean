@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Egor Lyfar
 -/
 import GKPCarry.BadCarryCounting
+import GKPCarry.DensityOne
 import GKPCarry.FiniteRangeCorollary
 import GKPCarry.GKPCharacterization
 import GKPCarry.InfiniteSieve

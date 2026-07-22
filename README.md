@@ -1,6 +1,6 @@
 Egor is building an independent AI research lab because his son Misha has rare genetic hearing loss. Every checked result tests and advances the research workflow. One rare disease is rare. Rare diseases together are not.
 
-# Carry distributions and an exact modular GKP sieve
+# A density-one GKP theorem and exact carry distributions
 
 This repository contains two complete, kernel-checked developments. The first
 gives an exact all-depth modular sieve for the power-of-two carry condition in
@@ -13,8 +13,9 @@ distribution of
 
 over each complete residue block `0 ≤ n < p ^ k`, for each odd prime `p`.
 
-Lean checks infinitely many GKP cases at each depth and proves that the
-certified class proportion tends to one. The GKP conjecture remains open.
+Lean proves that the exponents satisfying the GKP divisibility condition have
+natural density one. The GKP conjecture remains open because a density-zero
+exceptional set may be nonempty.
 
 ## Headline GKP result
 
@@ -61,6 +62,37 @@ Lean proves that this expression tends to zero and that its complement tends
 to one. At depth three, exactly nine of the eighteen exponent classes are
 certified, with the explicit set
 `{3, 4, 5, 7, 9, 10, 11, 15, 17}` modulo `18`.
+
+## Density-one GKP theorem
+
+For each bound `N`, let `GKPFailureExponentsBelow N` contain the exponents
+`k < N` for which
+
+```text
+9 ∤ centralBinom (2^k).
+```
+
+The formalization embeds these possible failures into quotient blocks paired
+with the residual modular classes. It proves the quantitative bound
+
+```text
+#failures below N ≤
+  (N / (2 * 3^(n+2)) + 1) * ((n+9) * 2^n)
+```
+
+for every sieve depth `n`. Combining that bound with the geometric decay of
+the residual class proportion gives the headline limit:
+
+```lean
+theorem tendsto_gkpFailureProportion_zero :
+    Filter.Tendsto gkpFailureProportion Filter.atTop (nhds 0)
+
+theorem tendsto_gkpSuccessProportion_one :
+    Filter.Tendsto gkpSuccessProportion Filter.atTop (nhds 1)
+```
+
+These are natural-density statements about the actual exponent sequence,
+rather than limits of unrelated finite samples.
 
 ## Odd-prime distribution result
 
@@ -157,7 +189,9 @@ The formalization includes:
 9. an equivalence between exponent periods and fixed-length ternary unit
    words; and
 10. exact residual and certified GKP class counts at every prefix depth,
-    together with their limiting proportions.
+    together with their limiting proportions; and
+11. a quantitative initial-interval bound and the density-zero theorem for
+    possible GKP failures.
 
 All source files are below 700 lines.
 
@@ -199,10 +233,10 @@ theorem gkpConjecture_iff_badCarryLanguageExclusion :
 but its right-hand side remains open. The new distribution theorem describes
 all residues in finite complete blocks. The modular sieve uses those finite
 states and certifies a class proportion tending to one. The checked bounds do
-not prove the persistent residual intersection empty. A GKP proof must exclude
-each residual nonexceptional exponent. The current results leave open whether
-finite-state methods can make further progress; these finite-prefix counts do
-not yield universal avoidance.
+prove that possible failures have natural density zero. They do not prove the
+failure set empty. A GKP proof must exclude each residual nonexceptional
+exponent. The current results leave open whether finite-state methods can make
+further progress.
 
 ## Reproduce and verify
 

@@ -37,3 +37,6 @@ import GKPCarry
 #print axioms GKPCarry.nine_dvd_centralBinom_two_pow_of_safe_mod_eighteen
 #print axioms GKPCarry.badCarryLanguage_two_pow_eq_false_of_certified_class
 #print axioms GKPCarry.gkp_exact_modular_sieve
+#print axioms GKPCarry.card_gkpFailureExponentsBelow_le
+#print axioms GKPCarry.tendsto_gkpFailureProportion_zero
+#print axioms GKPCarry.tendsto_gkpSuccessProportion_one
