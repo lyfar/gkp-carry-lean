@@ -27,6 +27,11 @@ abbrev GKPFailureExponentsBelow (bound : ℕ) :=
   {exponent : Fin bound //
     ¬ 9 ∣ Nat.centralBinom (2 ^ exponent.val)}
 
+/-- Exponents below `bound` that satisfy the GKP divisibility condition. -/
+abbrev GKPSuccessExponentsBelow (bound : ℕ) :=
+  {exponent : Fin bound //
+    9 ∣ Nat.centralBinom (2 ^ exponent.val)}
+
 /-- Encode a possible failure by its quotient block and its uncertified
 residue class at a chosen ternary depth. -/
 private def gkpFailureBlockEmbedding (depth bound : ℕ) :
@@ -196,10 +201,41 @@ theorem tendsto_gkpFailureProportion_zero :
   rw [Real.dist_eq, sub_zero, abs_of_nonneg hfailureNonnegative]
   exact hfailureBound.trans_lt (by linarith)
 
-/-- Complementary proportion of exponents satisfying the divisibility
+/-- Proportion of exponents below `bound` satisfying the divisibility
 condition. -/
 noncomputable def gkpSuccessProportion (bound : ℕ) : ℝ :=
-  1 - gkpFailureProportion bound
+  Fintype.card (GKPSuccessExponentsBelow bound) / bound
+
+theorem gkpSuccessProportion_eq_one_sub_failure
+    (bound : ℕ) (hbound : 0 < bound) :
+    gkpSuccessProportion bound = 1 - gkpFailureProportion bound := by
+  classical
+  let failure := fun exponent : Fin bound =>
+    ¬ 9 ∣ Nat.centralBinom (2 ^ exponent.val)
+  have hsuccess :
+      Fintype.card (GKPSuccessExponentsBelow bound) =
+        Fintype.card {exponent : Fin bound // ¬ failure exponent} := by
+    apply Fintype.card_congr
+    exact Equiv.subtypeEquivRight (fun exponent => by
+      simp only [failure, not_not])
+  have hfailure :
+      Fintype.card (GKPFailureExponentsBelow bound) =
+        Fintype.card {exponent : Fin bound // failure exponent} := by
+    rfl
+  have hpartition :
+      Fintype.card (GKPSuccessExponentsBelow bound) +
+          Fintype.card (GKPFailureExponentsBelow bound) = bound := by
+    rw [hsuccess, hfailure, Fintype.card_subtype_compl, Fintype.card_fin]
+    exact Nat.sub_add_cancel (by
+      simpa using Fintype.card_subtype_le failure)
+  have hpartitionReal :
+      (Fintype.card (GKPSuccessExponentsBelow bound) : ℝ) +
+          Fintype.card (GKPFailureExponentsBelow bound) = bound := by
+    exact_mod_cast hpartition
+  unfold gkpSuccessProportion gkpFailureProportion
+  have hboundReal : (bound : ℝ) ≠ 0 := by positivity
+  field_simp
+  linarith
 
 /-- **Density-one GKP theorem.** Powers of two satisfy the divisibility branch
 of the GKP conjecture for a set of exponents of natural density one. -/
@@ -208,8 +244,15 @@ theorem tendsto_gkpSuccessProportion_one :
   have hone :
       Filter.Tendsto (fun _ : ℕ => (1 : ℝ)) Filter.atTop (nhds 1) :=
     tendsto_const_nhds
-  unfold gkpSuccessProportion
-  convert hone.sub tendsto_gkpFailureProportion_zero using 1
-  norm_num
+  have hcomplement := hone.sub tendsto_gkpFailureProportion_zero
+  have hcomplement' :
+      Filter.Tendsto (fun bound => 1 - gkpFailureProportion bound)
+        Filter.atTop (nhds 1) := by
+    convert hcomplement using 1
+    norm_num
+  refine Filter.Tendsto.congr' ?_ hcomplement'
+  filter_upwards [Filter.eventually_ge_atTop 1] with bound hbound
+  exact (gkpSuccessProportion_eq_one_sub_failure bound
+    (Nat.zero_lt_of_lt hbound)).symm
 
 end GKPCarry

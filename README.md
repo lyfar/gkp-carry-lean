@@ -272,18 +272,14 @@ the pinned Lean kernel; AI provenance is not a substitute for checking.
 
 ## Lean Pool
 
-The existing maintainer-facing GKP characterization is
+The density-one GKP theorem, exact all-depth sieve, and carry-language
+characterization are submitted together in
 [Vilin97/lean-pool PR 273](https://github.com/Vilin97/lean-pool/pull/273).
 The odd-prime valuation-distribution theory is submitted separately as
 [Vilin97/lean-pool PR 276](https://github.com/Vilin97/lean-pool/pull/276),
 with no personal material in upstream project files.
-
-The all-depth GKP sieve is not part of either PR, and no new Lean Pool PR has
-been opened for it. A future standalone Lean Pool project would require an
-independent source or write-up for the derived theorem, a fresh branch from
-upstream `main`, maintainer-facing metadata, and the full Lean Pool review
-suite. This companion repository remains the honest public research snapshot
-until that significance and source gate is cleared.
+The upstream project card is mathematical and maintainer-facing; the personal
+mission statement remains confined to this companion repository.
 
 ## License
 
