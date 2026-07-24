@@ -1,4 +1,4 @@
-Egor is building an independent AI research lab because his son Misha has rare genetic hearing loss. Every checked result tests and advances the research workflow. One rare disease is rare. Rare diseases together are not.
+This project is part of an ongoing AI-assisted research workflow for formal mathematics: Lean checks each proof term against its stated assumptions, so a result either holds or it does not.
 
 # A carry-language characterization of the GKP conjecture
 
@@ -158,7 +158,7 @@ provenance is not a substitute for checking.
 The maintainer-facing port is
 [Vilin97/lean-pool PR 273](https://github.com/Vilin97/lean-pool/pull/273).
 The upstream project card stays mathematical and source-focused; this
-standalone companion records the broader MISHA research mission.
+standalone companion records the broader research workflow.
 
 ## License
 
